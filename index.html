@@ -1,0 +1,110 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.3.14/angular-sanitize.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="scripts/tasksApp.js"></script>
+    <script src="scripts/tasksServices-1.2.js"></script>    
+    <script src="scripts/tasksMain-1.2.js"></script>
+    <link rel="stylesheet" href="style/tasks-1.2.css">
+    
+    <title>SpaceX Task List</title>
+
+</head>
+<body ng-app="spacexTaskApp">
+    <div class="container body-content">
+
+        <nav class="navbar navbar-inverse" ng-controller="spacexTaskController">
+            <div id="he" class="container-fluid">
+                <div class="nav navbar-nav">
+                    <img class="navbar-img" src="http://www.spacex.com/sites/all/themes/spacex2012/logo.png" alt="spx" />
+                </div>
+                <div class="nav navbar-nav rAlign">
+                    <h4 class="titleColor">In-Memory Task Entry Prototype <sub>- Riaz Khan</sub></h4>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" ng-controller="spacexTaskController">
+            <div id="dvTasks" class="row">
+                <div class="col-sm-8">
+                    <span class="spnTitle">Task List</span>
+                    <button class="btn btn-primary btn-sm floatR" ng-click="creatNewTask()">New Task</button>
+                    <br /><br />
+                    <table class="table table-striped table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Due Date</th>
+                                <th>Date Created</th>
+                                <th>Date Modified</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="task in tasks" ng-click="selectRow(task, $index)">
+                                <td>{{task.title}}</td>
+                                <td>{{task.priority}}</td>
+                                <td>{{task.status}}</td>
+                                <td>{{task.dueDate}}</td>
+                                <td>{{task.dateCreated}}</td>
+                                <td>{{task.dateModified}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-sm-4" =" ng-show="showDetail">
+                    <span class="spnTitle">Task Detail</span>
+
+                    <form name="addTask">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" ng-model="detailModel.title">
+
+                        <label for="description">Description</label>
+                        <textarea class="form-control" rows="5" id="description" ng-model="detailModel.taskDescription"></textarea>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="priority">Priority</label>
+                                <select class="form-control" data-ng-options="o for o in priorities" data-ng-model="selectedPriority" ng-change="updatePriority(this)"></select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="status">Status</label>
+                                <select class="form-control" data-ng-options="o for o in statuses" data-ng-model="selectedStatus" ng-change="updateStatus(this)"></select>
+                            </div>
+                        </div>
+                        <label for="dueDate">Due Date</label>
+                        <input type="text" class="form-control" id="dueDate" ng-model="detailModel.dueDate">
+
+                        <label for="status">Parent</label>
+
+                        <select class="form-control" data-ng-options="o.title for o in tasks" data-ng-model="selectedTaskParent">
+                            <option value="">Select Option</option>
+                        </select>
+                        <br /><br />
+                        <button ng-show="adding" class="btn btn-primary btn-sm" ng-click="add()">Add</button>
+                        <button ng-show="editing" class="btn btn-primary btn-sm" ng-click="delete()">Delete</button>
+                        <button class="btn btn-primary btn-sm floatR" ng-click="cancel()">Cancel</button>
+                        <button ng-show="editing" class="btn btn-primary btn-sm" ng-click="doneEditing()">Save</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2017 - SpaceX Task List</p>
+        </footer>
+    </div>
+</body>
+</html>

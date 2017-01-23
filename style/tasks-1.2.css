@@ -1,0 +1,44 @@
+﻿.spnTitle {
+            display: block;
+            margin-bottom: 10px;
+            font-size: larger;
+        }
+
+        div.div.Row {
+            margin-bottom: 10px;
+        }
+
+        .floatR {
+            float: right;
+        }
+
+        #h {
+            background: linear-gradient(to right, rgba(0,0,255,0), rgba(0,0,255,0.4)); /* Standard syntax (must be last) */
+        }
+
+        .navbar-img {
+            margin-top: 10px;
+        }
+
+        .titleColor {
+            color: #9b9391;
+        }
+
+        .rAlign {
+            float: right;
+            margin-top: 6px;
+        }
+
+        .btn-primary {
+            color: #9b9391;
+            background-color: #222;
+            border-color: #0a3c71;
+            
+        }
+        div > h4 > sub{
+            font-size:x-small;
+        }
+
+        table > tbody > tr{
+            cursor:pointer;
+        }
